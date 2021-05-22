@@ -14,6 +14,9 @@
     "dev:be": "node --inspect -r ts-node/register server/index.ts",
     "dev:be:brk": "node --inspect-brk -r ts-node/register server/index.ts"
   },
+  "engines": {
+    "node": ">=10.0.0 <15"
+  },
   "dependencies": {
     "@material-ui/core": "4.9.5",
     "body-parser": "1.19.0",
