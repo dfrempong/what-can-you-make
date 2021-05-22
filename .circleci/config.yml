@@ -9,9 +9,6 @@ workflows:
   heroku_deploy:
     jobs:
       - build
-      - test:
-          requires:
-            - build
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - test
@@ -34,7 +31,5 @@ jobs:
       - checkout
       # Bundle install dependencies
       - run: yarn
-      # Database setup
-  test:
-    steps:
       - run: yarn test
+      # Database setup
