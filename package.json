@@ -8,7 +8,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack --mode production",
+    "dev": "webpack-dev-server",
     "build": "tsc",
     "lint": "eslint src/ server/ --ext .js,.jsx,.ts,.tsx",
     "dev:be": "node --inspect -r ts-node/register server/index.ts",
