@@ -30,9 +30,6 @@ jobs:
     steps:
       - checkout
       # Bundle install dependencies
-      - run: bundle install --path vendor/bundle
+      - run: yarn
       # Database setup
-      - run: bundle exec rake db:create db:schema:load
-      - run:
-          name: Run tests
-          command: rake
+      - run: yarn start
