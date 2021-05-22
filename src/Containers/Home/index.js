@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { HomeWrapper } from "./styles"
+import { HomeWrapper, RecipeButton } from "./styles"
 import Input from '@material-ui/core/Input'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -33,7 +33,8 @@ class Home extends Component {
     } = props
     this.state = {
       term,
-      ingredients
+      ingredients,
+      recipeId
     }
     searchRecipes(term, ingredients)
     fetchRecipe(recipeId)
@@ -73,12 +74,13 @@ class Home extends Component {
       fetchRecipe
     } = this.props
     fetchRecipe(recipeId)
+    this.setState({recipeId})
     const params = new URLSearchParams(location.search)
     params.set('recipeId', recipeId)
     window.history.replaceState({}, '', `${location.pathname}?${params}`)
   }
   render () {
-    const {term, ingredients} = this.state
+    const {term, ingredients, recipeId} = this.state
     const {recipes, isLoading} = this.props
     return (
       <HomeWrapper>
@@ -115,7 +117,9 @@ class Home extends Component {
             <List>
               {recipes.map( recipe =>
                 <ListItem key={recipe.id}>
-                  <ListItemText primary={recipe.name} onClick={this.handleRecipeSelection.bind(this, recipe)}/>
+                  <RecipeButton className={(recipeId === recipe.id) && 'selected'}>
+                    <ListItemText primary={recipe.name} onClick={this.handleRecipeSelection.bind(this, recipe)}/>
+                  </RecipeButton>
                 </ListItem>
               )}
             </List>

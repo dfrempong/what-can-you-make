@@ -16,7 +16,7 @@ describe('async actions', () => {
   })
 
   it('creates RECEIVE_RECIPE when fetching receipe has been done', () => {
-    fetchMock.getOnce(`/api/recipies/${sampleRecipe.id}`, {
+    fetchMock.getOnce(`/api/recipe/${sampleRecipe.id}`, {
       body:  { ...sampleRecipe },
       headers: { 'content-type': 'application/json' }
     })
@@ -33,7 +33,7 @@ describe('async actions', () => {
   })
 
   it('creates FAIL_RECIPE when fetching recipe fails', () => {
-    fetchMock.getOnce(`/api/recipies/null`, {
+    fetchMock.getOnce(`/api/recipe/null`, {
       headers: { 'content-type': 'application/json' },
       status: 404,
       throws :new TypeError('Failed to fetch')

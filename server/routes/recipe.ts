@@ -1,23 +1,24 @@
-import { RecipeModel, Ingredient } from "../models"
+import { RecipeModel } from "../models"
 import { Request, Response, NextFunction } from "express"
 
-
-const escapeRegex = (text) : string => {
-  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
+const formatIngredients = (ingredient) : {id:string, name:string[], unit:string, amount: string } => {
+  const {id, name, unit, amount} = ingredient
+  return {id, name, unit, amount} 
 }
 
-// interface Query {
-//   name?: RegExp;
-//   ingredients?: Ingredient[]
-// }
-
-// const recipeCleaner = (recipe) : {id:string, name:string} => {
-//   const {id, name} = recipe
-//   return {id, name}
-// }
+const formatRecipe = (recipe) : {id:string, ingredients:string[], name:string, instructions: string } => { 
+  const {id, ingredients:rawIngredients, name, instructions} = recipe
+  const ingredients = rawIngredients.map(formatIngredients)
+  return {id, ingredients, name, instructions}
+}
 
 export const recipeMiddleware = async (req: Request, res: Response, next: NextFunction) : Promise<void> => {
   // TODO fetch and return a recipe
-  const foundRecipes = await RecipeModel.findOne({_id: req.params.id})
-  res.send(foundRecipes)
+  const {id} = req.params
+  const foundRecipes = await RecipeModel.findOne({_id:id})
+  if (!foundRecipes) {
+    next()
+  } else {
+    res.send(formatRecipe(foundRecipes))
+  }
 }
