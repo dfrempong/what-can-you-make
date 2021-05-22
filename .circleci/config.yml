@@ -14,7 +14,7 @@ workflows:
             - build
           filters:
             branches:
-              only: sequential-branch-filter
+              only: master
 jobs:
   build:
     docker:
@@ -32,4 +32,3 @@ jobs:
       # Bundle install dependencies
       - run: yarn
       # Database setup
-      - run: yarn start
