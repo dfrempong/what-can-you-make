@@ -11,7 +11,7 @@ const searchFetching = (state) => {
 }
 
 const searchFetched = (state, payload) => {
-  return {...state, isLoading: false, recipes: payload}
+  return {...state, isLoading: false, recipes: payload} //TODO Clean up error
 }
 
 const searchFailed = (state, payload) => {
