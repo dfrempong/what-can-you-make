@@ -4,6 +4,7 @@ version: 2.1
 
 orbs:
     heroku: circleci/heroku@1.2.6 # Invoke the Heroku orb
+    codecov: codecov/codecov@1.2.0
 
 workflows:
   heroku_deploy:
@@ -32,4 +33,6 @@ jobs:
       # Bundle install dependencies
       - run: yarn
       - run: yarn test
+      - codecov/upload:
+          file:  ~/what-can-you-make/coverage/clover.xml
       # Database setup
