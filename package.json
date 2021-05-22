@@ -15,7 +15,7 @@
     "dev:be:brk": "node --inspect-brk -r ts-node/register server/index.ts"
   },
   "engines": {
-    "node": ">=10.0.0 <15"
+    "node": "14.x"
   },
   "dependencies": {
     "@material-ui/core": "4.9.5",
