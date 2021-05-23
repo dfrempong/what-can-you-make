@@ -14,7 +14,7 @@ const recipeFetching = (state) => {
 }
 
 const recipeFetched = (state, payload) => {
-  return {...state, isLoading: false, recipe: payload}
+  return {...state, isLoading: false, recipe: payload, error: null}
 }
 
 const recipeFailed = (state, payload) => {

@@ -81,7 +81,7 @@ class Home extends Component {
   }
   render () {
     const {term, ingredients, recipeId} = this.state
-    const {recipes, isLoading} = this.props
+    const {recipes, isLoading, error} = this.props
     return (
       <HomeWrapper>
         <Input
@@ -115,16 +115,17 @@ class Home extends Component {
         {
           recipes && (
             <List>
-              {recipes.map( recipe =>
+              {recipes.length >0 ? recipes.map( recipe =>
                 <ListItem key={recipe.id}>
                   <RecipeButton className={(recipeId === recipe.id) && 'selected'}>
                     <ListItemText primary={recipe.name} onClick={this.handleRecipeSelection.bind(this, recipe)}/>
                   </RecipeButton>
                 </ListItem>
-              )}
+              ) : <p>No recipes found for current selection</p>}
             </List>
           )
         }
+        {error && <p>Error updating recipes due to {error}</p>}
         {isLoading && <LinearProgress />}
         <Divider />
         {/*

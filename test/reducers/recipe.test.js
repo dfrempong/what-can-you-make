@@ -1,5 +1,5 @@
-import reducers from '../../reducers'
-import * as types from '../../actions'
+import reducers from '../../src/reducers'
+import * as types from '../../src/actions'
 
 describe('recipe reducer', () => {
   it('should return the initial state', () => {
@@ -81,4 +81,19 @@ describe('recipe reducer', () => {
       }
     )
   })
+
+   it('should handle FAIL_RECIPE', () => {
+    expect(
+      reducers({}, {
+        type: types.FAIL_RECIPE,
+        payload: 'Error'
+      }).recipe
+    ).toEqual(
+      {
+        isLoading: false,
+        recipe: null,
+        error: 'Error'
+      }
+    )
+})
 })
