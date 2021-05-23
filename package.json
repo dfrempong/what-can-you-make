@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "start": "webpack --mode production",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server  --host 0.0.0.0",
     "build": "tsc",
     "lint": "eslint src/ server/ --ext .js,.jsx,.ts,.tsx",
     "dev:be": "node --inspect -r ts-node/register server/index.ts",
