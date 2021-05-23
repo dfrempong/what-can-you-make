@@ -41,11 +41,13 @@ workflows:
   heroku_deploy:
     jobs:
       - install-node
+      - run-app-test
+          requires:
+            ` install-node
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
-            - install-node
+            - run-app-test
           pre-steps:
-            - run: curl -o- -L https://yarnpkg.com/install.sh | bash
             - run: yarn test
             - codecov/upload:
                 file:  ./coverage/clover.xml
