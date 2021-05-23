@@ -32,8 +32,8 @@ jobs:
       - checkout
       # Bundle install dependencies
       - run: yarn
-      - run: yarn build
       - run: yarn test
       - codecov/upload:
           file:  ./coverage/clover.xml
+      - run: rm -R node_modules
       # Database setup
