@@ -9,8 +9,6 @@ workflows:
   test-and-deploy:
     jobs:
       - node/test
-      - codecov/upload:
-          file:  ./coverage/clover.xml
       - heroku/deploy-via-git:
           filters:
             branches:
