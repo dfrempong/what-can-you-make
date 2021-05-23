@@ -22,7 +22,8 @@ jobs:
     steps:
       - checkout
       # Bundle install dependencies
-      # - run: yarn
+      - run: yarn
+      - run: build
       - run: yarn test
       - codecov/upload:
           file:  ./coverage/clover.xml
