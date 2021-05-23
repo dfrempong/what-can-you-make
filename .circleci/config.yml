@@ -14,7 +14,10 @@ workflows:
           # requires:
           #   - build
           pre-steps:
-            - run: run-app-test
+            - run: yarn test
+            - codecov/upload:
+                file:  ./coverage/clover.xml
+            - run: rm -R node_modules
           filters:
             branches:
               only: extra-credit
