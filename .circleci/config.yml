@@ -13,11 +13,13 @@ workflows:
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           # requires:
           #   - build
+          pre-steps:
+            - run: test
           filters:
             branches:
               only: extra-credit
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/ruby:2.4-node
         auth:
@@ -31,7 +33,7 @@ jobs:
     steps:
       - checkout
       # Bundle install dependencies
-      - run: yarn
+      # - run: yarn
       - run: yarn test
       - codecov/upload:
           file:  ./coverage/clover.xml
