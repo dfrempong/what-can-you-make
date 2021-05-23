@@ -43,7 +43,7 @@ workflows:
       - install-node
       - run-app-test
           requires:
-            ` install-node
+            - install-node
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - run-app-test
