@@ -27,7 +27,6 @@ jobs:
       - run: yarn test
       - codecov/upload:
           file:  ./coverage/clover.xml
-      - run: rm -R node_modules
       # Database setup
   install-node:
     docker:
@@ -48,11 +47,6 @@ workflows:
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - run-app-test
-          pre-steps:
-            - run: yarn test
-            - codecov/upload:
-                file:  ./coverage/clover.xml
-            - run: rm -R node_modules
           filters:
             branches:
               only: extra-credit
