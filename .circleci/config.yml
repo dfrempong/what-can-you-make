@@ -14,7 +14,7 @@ workflows:
           # requires:
           #   - build
           pre-steps:
-            -run: run-app-test
+            - run: run-app-test
           filters:
             branches:
               only: extra-credit
