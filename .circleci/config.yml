@@ -24,10 +24,10 @@ jobs:
       # Bundle install dependencies
       - run: yarn
       - run: yarn build
+      - run: yarn run heroku-pre-deploy
       - run: yarn test
       - codecov/upload:
           file:  ./coverage/clover.xml
-      # Database setup
   install-node:
     docker:
       - image: 'cimg/base:stable'
@@ -48,8 +48,6 @@ workflows:
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - run-app-test
-          pre-steps:
-            - run: yarn run heroku-pre-deploy
           filters:
             branches:
               only: extra-credit
