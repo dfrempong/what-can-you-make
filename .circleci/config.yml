@@ -14,12 +14,12 @@ workflows:
           # requires:
           #   - build
           pre-steps:
-            - run: test
+            - run-app-test
           filters:
             branches:
               only: extra-credit
 jobs:
-  test:
+  run-app-test:
     docker:
       - image: circleci/ruby:2.4-node
         auth:
