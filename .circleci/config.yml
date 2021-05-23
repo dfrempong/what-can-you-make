@@ -49,7 +49,7 @@ workflows:
           requires:
             - run-app-test
           pre-steps:
-            -run: yarn run heroku-pre-deploy
+            - run: yarn run heroku-pre-deploy
           filters:
             branches:
               only: extra-credit
