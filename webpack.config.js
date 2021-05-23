@@ -6,7 +6,7 @@ const webpack = require('webpack')
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: {
-    main: "./src/index.js"
+    main: "./app.js"
   },
   devtool: "eval-source-map",
   resolve: {
