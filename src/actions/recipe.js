@@ -20,7 +20,7 @@ const failedRecipeFetch = (payload) => ({
 })
 
 export const executeRecipeFetch = async (recipeId) => {
-  const response = await fetch(`/api/recipies/${recipeId}`, {
+  const response = await fetch(`/api/recipe/${recipeId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'

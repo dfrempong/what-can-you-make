@@ -24,7 +24,7 @@ class Recipe extends Component {
           <h2>Ingredients</h2>
           <List>
             {recipe.ingredients.map( ingredient =>
-              <ListItem key={ingredient._id}>
+              <ListItem key={ingredient.id}>
                 <ListItemText primary={`${ingredient.amount} ${ingredient.unit}${ingredient.amount !== 1 && 's'} of ${ingredient.name}`}/>
               </ListItem>
             )}

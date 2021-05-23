@@ -8,3 +8,13 @@ export const HomeWrapper = styled.div`
   margin: auto;
   padding: 8px;
 `
+export const RecipeButton = styled.div`
+  &:hover {
+    background: grey;
+    cursor: pointer
+  }
+  &.selected {
+    background: pink;
+  }
+  width: 100%
+`

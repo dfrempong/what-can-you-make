@@ -1,5 +1,5 @@
-import reducers from '../../reducers'
-import * as types from '../../actions'
+import reducers from '../../src/reducers'
+import * as types from '../../src/actions'
 
 describe('search reducer', () => {
   it('should return the initial state', () => {
@@ -78,6 +78,21 @@ describe('search reducer', () => {
         isLoading: false,
         recipes: [{id: '123', instructions: 'deets2'}],
         error: null
+      }
+    )
+  })
+
+   it('should handle FAIL_SEARCH', () => {
+    expect(
+      reducers({}, {
+        type: types.FAIL_SEARCH,
+        payload: 'Error'
+      }).search
+    ).toEqual(
+      {
+        isLoading: false,
+        recipes: null,
+        error: 'Error'
       }
     )
   })
