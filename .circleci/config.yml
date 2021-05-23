@@ -34,6 +34,7 @@ jobs:
     steps:
       - checkout
       - node/install:
+          node-version: '12.22.1'
           install-yarn: true
       - run: node --version
 
