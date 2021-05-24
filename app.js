@@ -4,15 +4,12 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 const port = process.env.PORT || 8080
 const app = express()
 
-const apiProxy = createProxyMiddleware('/api', { target: 'http://localhost:4000' })
+const apiProxy = createProxyMiddleware('/api', { target: 'http://localhost:4000', changeOrigin: true, })
 app.use(apiProxy)
 
 app.use(express.static(path.join(__dirname, 'static')))
-
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'static/index.html'))
 })
-
-app.use('/api/*', express.static(path.join(__dirname, 'server')))
 
 app.listen(port)
