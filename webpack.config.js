@@ -5,6 +5,7 @@ const webpack = require('webpack')
 
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  target: 'node',
   entry: {
     main: "./src/index.js"
   },

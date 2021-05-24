@@ -125,7 +125,7 @@ class Home extends Component {
             </List>
           )
         }
-        {error && <p>Error updating recipes due to {error}</p>}
+        {error && <p>Error updating recipes. Please try again</p>}
         {isLoading && <LinearProgress />}
         <Divider />
         {/*

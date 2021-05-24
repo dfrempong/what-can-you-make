@@ -5,19 +5,10 @@ version: 2.1
 orbs:
     heroku: circleci/heroku@1.2.6 # Invoke the Heroku orb
     codecov: codecov/codecov@1.2.0
+    node: circleci/node@4.4.0
 
-workflows:
-  heroku_deploy:
-    jobs:
-      - build
-      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
 jobs:
-  build:
+  run-app-test:
     docker:
       - image: circleci/ruby:2.4-node
         auth:
@@ -32,7 +23,31 @@ jobs:
       - checkout
       # Bundle install dependencies
       - run: yarn
+      - run: yarn build
+      - run: yarn run heroku-pre-deploy
       - run: yarn test
       - codecov/upload:
           file:  ./coverage/clover.xml
-      # Database setup
+  install-node:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - node/install:
+          node-version: '12.22.1'
+          install-yarn: true
+      - run: node --version
+
+workflows:
+  heroku_deploy:
+    jobs:
+      - install-node
+      - run-app-test:
+          requires:
+            - install-node
+      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+          requires:
+            - run-app-test
+          filters:
+            branches:
+              only: extra-credit

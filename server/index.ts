@@ -1,6 +1,7 @@
 import express from "express"
 import bodyParser from "body-parser"
 import http from "http"
+import path from "path"
 import { createAndConnectToServer } from "./db"
 import { searchMiddleware, recipeMiddleware } from "./routes"
 
@@ -13,6 +14,13 @@ const appStartup = async () : Promise<void> => {
   // create our routes
   app.post('/api/search', searchMiddleware)
   app.get('/api/recipe/:id', recipeMiddleware)
+  
+  // render UI
+  app.use(express.static(path.join(__dirname, 'static')))
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'static/index.html'))
+  })
+
   // create a server
   const httpServer = new http.Server(app)
   httpServer.listen(4000, "0.0.0.0", () => {
