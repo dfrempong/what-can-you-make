@@ -5,7 +5,7 @@ const port = process.env.PORT || 8080
 const app = express()
 
 app.use(express.static(path.join(__dirname, 'server')))
-const apiProxy = createProxyMiddleware('/api', { target: 'http://localhost:4000', changeOrigin: true, })
+const apiProxy = createProxyMiddleware('/api', { target: 'http://0.0.0.0:4000', changeOrigin: true, })
 app.use(apiProxy)
 
 app.use(express.static(path.join(__dirname, 'static')))
